@@ -1,5 +1,6 @@
 package com.example.codecentric.pma_movieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.example.codecentric.pma_movieapp.activities.MovieActivity;
 import com.example.codecentric.pma_movieapp.adapters.DrawerListAdapter;
 import com.example.codecentric.pma_movieapp.model.MenuItem;
 
@@ -103,12 +106,19 @@ public class MainActivity extends AppCompatActivity {
     private void selectItemFromDrawer(int position) {
         if(position == 0){
             //FragmentTransition.to(MyFragment.newInstance(), this, false);
+            //Toast.makeText(getApplicationContext(),"0 toast",Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, MovieActivity.class);
+            startActivity(i);
+
         }else if(position == 1){
+            Toast.makeText(getApplicationContext(),"1 toast",Toast.LENGTH_LONG).show();
             //..
         }else if(position == 2){
-           // Intent preference = new Intent(MainActivity.this,ReviewerPreferenceActivity.class);
-           // startActivity(preference);
+            // Intent preference = new Intent(MainActivity.this,ReviewerPreferenceActivity.class);
+            // startActivity(preference);
+            Toast.makeText(getApplicationContext(),"2 toast",Toast.LENGTH_LONG).show();
         }else if(position == 3){
+            Toast.makeText(getApplicationContext(),"3 toast",Toast.LENGTH_LONG).show();
             //..
         }else if(position == 4){
             //..
@@ -126,6 +136,19 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawer(mDrawerPane);
     }
 
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+       /* if (id == R.id.action_settings) {
+            return true;
+        }*/
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
 }

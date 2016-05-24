@@ -11,30 +11,29 @@ import java.util.List;
  * Created by Aleksandar Ratkov on 23.5.16..
  */
 public class Movie implements Parcelable{
+    public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 
     //TODO da li je potreban mozda id zbog kasnijeg rate-inga
 
     private String title;
-
-    @SerializedName("overview")
-    private String descripton;
-
     @SerializedName("poster_path")
     private String poster;
-
+    @SerializedName("overview")
+    private String description;
     @SerializedName("backdrop_path")
     private String backdrop;
-
     @SerializedName("vote_average")
-    private Double voteAverage;
+    private double voteAverage;
 
+    public Movie() {
+    }
 
-    public Movie(Parcel p) {
-        this.title = p.readString();
-        this.descripton = p.readString();
-        this.poster = p.readString();
-        this.backdrop = p.readString();
-        this.voteAverage = p.readDouble();
+    public Movie(Parcel in) {
+        title = in.readString();
+        poster = in.readString();
+        description = in.readString();
+        backdrop = in.readString();
+        voteAverage = in.readDouble();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -57,24 +56,24 @@ public class Movie implements Parcelable{
         this.title = title;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.descripton = descripton;
+    public void setDescription(String descripton) {
+        this.description = descripton;
     }
 
-    public Double getVoteAverage() {
+    public double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVoteAverage(double voteAverage) {
+        voteAverage = voteAverage;
     }
 
     public String getPoster() {
-        return "http://image.tmdb.org/t/p/w500" + poster;
+        return IMAGE_PATH + poster;
     }
 
     public void setPoster(String poster) {
@@ -82,7 +81,7 @@ public class Movie implements Parcelable{
     }
 
     public String getBackdrop() {
-        return "http://image.tmdb.org/t/p/w500"  + backdrop;
+        return IMAGE_PATH  + backdrop;
     }
 
     public void setBackdrop(String backdrop) {
@@ -93,7 +92,9 @@ public class Movie implements Parcelable{
     public String toString() {
         return "Movie{" +
                 "title='" + title + '\'' +
-                ", descripton='" + descripton + '\'' +
+                ", poster='" + poster + '\'' +
+                ", description='" + description + '\'' +
+                ", backdrop='" + backdrop + '\'' +
                 ", voteAverage=" + voteAverage +
                 '}';
     }
@@ -104,8 +105,12 @@ public class Movie implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(title);
+        parcel.writeString(poster);
+        parcel.writeString(description);
+        parcel.writeString(backdrop);
+        parcel.writeDouble(voteAverage);
     }
 
     public static class MovieResult {
