@@ -1,5 +1,6 @@
 package com.example.codecentric.pma_movieapp.service;
 
+import com.example.codecentric.pma_movieapp.model.Genre;
 import com.example.codecentric.pma_movieapp.model.Series;
 
 import retrofit.Callback;
@@ -11,12 +12,12 @@ import retrofit.http.GET;
 public interface SeriesService {
 
     @GET("/tv/popular")
-    void getPopularMovies(Callback<Series.SeriesResult> cb);
+    void getPopularSeries(Callback<Series.SeriesResult> cb);
 
 
     @GET("/search/tv")
-    void getSearchedMovies(Callback<com.example.codecentric.pma_movieapp.model.Series.SeriesResult> cb);
+    void getSearchedSeries(Callback<Series.SeriesResult> cb);
 
     @GET("/genre/tv/list")
-    void getMovieGenres(Callback<com.example.codecentric.pma_movieapp.model.Genre.GenreResult> cb);
+    void getSeriesGenres(Callback<Genre.GenreResult> cb);
 }

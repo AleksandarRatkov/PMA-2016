@@ -1,13 +1,14 @@
-package com.example.codecentric.pma_movieapp.activities;
+package com.example.codecentric.pma_movieapp.fragments;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.codecentric.pma_movieapp.R;
@@ -21,21 +22,34 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MovieActivity extends AppCompatActivity {
+public class MovieFragment extends Fragment {
+
 
     private RecyclerView mRecyclerView;
     private MovieAdapter mAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movie);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public static MovieFragment newInstance() {
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        mAdapter = new MovieAdapter(this);
+        MovieFragment ma = new MovieFragment();
+
+        return ma;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        View view = inflater.inflate(R.layout.movie_fragment,container,false);
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerViewMovie);
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        mAdapter = new MovieAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         getPopularMovies();
     }
@@ -63,13 +77,6 @@ public class MovieActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override

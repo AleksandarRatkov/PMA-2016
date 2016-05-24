@@ -11,11 +11,14 @@ import java.util.List;
  * Created by Aleksandar Ratkov on 23.5.16..
  */
 public class Series implements Parcelable {
+
+    public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
+
     @SerializedName("original_name")
     private String title;
 
     @SerializedName("overview")
-    private String descripton;
+    private String description;
 
     @SerializedName("poster_path")
     private String poster;
@@ -24,15 +27,22 @@ public class Series implements Parcelable {
     private String backdrop;
 
     @SerializedName("vote_average")
-    private Double voteAverage;
+    private double voteAverage;
 
+    @SerializedName("first_air_date")
+    private String firstAirDate;
+
+
+    public Series() {
+    }
 
     public Series(Parcel p) {
-        this.title = p.readString();
-        this.descripton = p.readString();
-        this.poster = p.readString();
-        this.backdrop = p.readString();
-        this.voteAverage = p.readDouble();
+        title = p.readString();
+        poster = p.readString();
+        description = p.readString();
+        backdrop = p.readString();
+        voteAverage = p.readDouble();
+        firstAirDate = p.readString();
     }
 
     public static final Creator<Series> CREATOR = new Creator<Series>() {
@@ -55,24 +65,24 @@ public class Series implements Parcelable {
         this.title = title;
     }
 
-    public String getDescripton() {
-        return descripton;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripton(String descripton) {
-        this.descripton = descripton;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Double getVoteAverage() {
+    public double getVoteAverage() {
         return voteAverage;
     }
 
-    public void setVoteAverage(Double voteAverage) {
+    public void setVoteAverage(double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
     public String getPoster() {
-        return "http://image.tmdb.org/t/p/w500" + poster;
+        return IMAGE_PATH + poster;
     }
 
     public void setPoster(String poster) {
@@ -80,19 +90,30 @@ public class Series implements Parcelable {
     }
 
     public String getBackdrop() {
-        return "http://image.tmdb.org/t/p/w500" + backdrop;
+        return IMAGE_PATH + backdrop;
     }
 
     public void setBackdrop(String backdrop) {
         this.backdrop = backdrop;
     }
 
+    public String getFirstAirDate() {
+        return firstAirDate;
+    }
+
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
+    }
+
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Series{" +
                 "title='" + title + '\'' +
-                ", descripton='" + descripton + '\'' +
+                ", description='" + description + '\'' +
+                ", poster='" + poster + '\'' +
+                ", backdrop='" + backdrop + '\'' +
                 ", voteAverage=" + voteAverage +
+                ", firstAirDate='" + firstAirDate + '\'' +
                 '}';
     }
 
@@ -102,8 +123,13 @@ public class Series implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(title);
+        parcel.writeString(poster);
+        parcel.writeString(description);
+        parcel.writeString(backdrop);
+        parcel.writeDouble(voteAverage);
+        parcel.writeString(firstAirDate);
     }
 
     public static class SeriesResult {

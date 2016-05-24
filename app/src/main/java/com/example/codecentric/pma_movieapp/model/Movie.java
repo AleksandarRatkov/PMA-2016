@@ -24,6 +24,8 @@ public class Movie implements Parcelable{
     private String backdrop;
     @SerializedName("vote_average")
     private double voteAverage;
+    @SerializedName("release_date")
+    private String releaseDate;
 
     public Movie() {
     }
@@ -34,6 +36,7 @@ public class Movie implements Parcelable{
         description = in.readString();
         backdrop = in.readString();
         voteAverage = in.readDouble();
+        releaseDate = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -88,6 +91,14 @@ public class Movie implements Parcelable{
         this.backdrop = backdrop;
     }
 
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -111,6 +122,7 @@ public class Movie implements Parcelable{
         parcel.writeString(description);
         parcel.writeString(backdrop);
         parcel.writeDouble(voteAverage);
+        parcel.writeString(releaseDate);
     }
 
     public static class MovieResult {

@@ -1,6 +1,5 @@
 package com.example.codecentric.pma_movieapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,8 +13,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.example.codecentric.pma_movieapp.activities.MovieActivity;
 import com.example.codecentric.pma_movieapp.adapters.DrawerListAdapter;
+import com.example.codecentric.pma_movieapp.fragments.MovieFragment;
+import com.example.codecentric.pma_movieapp.fragments.SeriesFragment;
 import com.example.codecentric.pma_movieapp.model.MenuItem;
 
 import java.util.ArrayList;
@@ -105,14 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void selectItemFromDrawer(int position) {
         if(position == 0){
-            //FragmentTransition.to(MyFragment.newInstance(), this, false);
-            //Toast.makeText(getApplicationContext(),"0 toast",Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, MovieActivity.class);
-            startActivity(i);
+
+            FragmentTransition.to(MovieFragment.newInstance(), this, false);
 
         }else if(position == 1){
-            Toast.makeText(getApplicationContext(),"1 toast",Toast.LENGTH_LONG).show();
-            //..
+            FragmentTransition.to(SeriesFragment.newInstance(), this, false);
         }else if(position == 2){
             // Intent preference = new Intent(MainActivity.this,ReviewerPreferenceActivity.class);
             // startActivity(preference);

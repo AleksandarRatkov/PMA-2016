@@ -2,8 +2,8 @@
     <string name="app_name">PMA-MovieApp</string>
     <string name="movies">Movies</string>
     <string name="movies_long">Search movies</string>
-    <string name="series">Search movies</string>
-    <string name="series_long">Series</string>
+    <string name="series">Series</string>
+    <string name="series_long">Search movies</string>
     <string name="actors">Actors</string>
     <string name="actors_long">Search actors</string>
     <string name="settings">Settings</string>

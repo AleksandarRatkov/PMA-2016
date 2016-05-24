@@ -21,6 +21,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     TextView title;
     TextView average;
     TextView description;
+    TextView releaseDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +38,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         CollapsingToolbarLayout toolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         toolbarLayout.setTitle(mMovie.getTitle());
 
-        backdrop = (ImageView) findViewById(R.id.backdrop);
+        backdrop = (ImageView) findViewById(R.id.movie_backdrop);
         title = (TextView) findViewById(R.id.movie_title);
         average = (TextView) findViewById(R.id.movie_average);
         description = (TextView) findViewById(R.id.movie_description);
         poster = (ImageView) findViewById(R.id.movie_posters);
+        releaseDate = (TextView) findViewById(R.id.movie_release_date);
 
         title.setText(mMovie.getTitle());
-        title.setText("Vote average: " + mMovie.getVoteAverage());
+        average.setText("Vote average: " + mMovie.getVoteAverage());
         description.setText(mMovie.getDescription());
+        releaseDate.setText("Release date: " + mMovie.getReleaseDate());
         Picasso.with(this)
                 .load(mMovie.getPoster())
                 .into(poster);

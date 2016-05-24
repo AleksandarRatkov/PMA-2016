@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.codecentric.pma_movieapp.R;
-import com.example.codecentric.pma_movieapp.activities.MovieActivity;
 import com.example.codecentric.pma_movieapp.activities.MovieDetailActivity;
+import com.example.codecentric.pma_movieapp.fragments.MovieFragment;
 import com.example.codecentric.pma_movieapp.model.Movie;
 import com.squareup.picasso.Picasso;
 
@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Aleksandar Ratkov on 24.5.16..
  */
-public class MovieAdapter extends RecyclerView.Adapter<MovieActivity.MovieViewHolder>{
+public class MovieAdapter extends RecyclerView.Adapter<MovieFragment.MovieViewHolder>{
 
     private List<Movie> mMovieList;
     private LayoutInflater mInflater;
@@ -31,9 +31,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieActivity.MovieViewHo
     }
 
     @Override
-    public MovieActivity.MovieViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
+    public MovieFragment.MovieViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         View view = mInflater.inflate(R.layout.row_movie, parent, false);
-        final MovieActivity.MovieViewHolder viewHolder = new MovieActivity.MovieViewHolder(view);
+        final MovieFragment.MovieViewHolder viewHolder = new MovieFragment.MovieViewHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,7 +47,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieActivity.MovieViewHo
     }
 
     @Override
-    public void onBindViewHolder(MovieActivity.MovieViewHolder holder, int position) {
+    public void onBindViewHolder(MovieFragment.MovieViewHolder holder, int position) {
         Movie movie = mMovieList.get(position);
         Picasso.with(mContext)
                 .load(movie.getPoster())
