@@ -36,6 +36,15 @@ public class Series implements Parcelable {
     public Series() {
     }
 
+    public Series(String title, String description, String poster, String backdrop, double voteAverage, String firstAirDate) {
+        this.title = title;
+        this.description = description;
+        this.poster = poster;
+        this.backdrop = backdrop;
+        this.voteAverage = voteAverage;
+        this.firstAirDate = firstAirDate;
+    }
+
     public Series(Parcel p) {
         title = p.readString();
         poster = p.readString();

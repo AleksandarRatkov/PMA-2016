@@ -19,7 +19,8 @@
         </activity>
         <activity android:name=".activities.MovieDetailActivity" />
         <activity android:name=".activities.MovieActivity" />
-        <activity android:name=".activities.SeriesDetailActivity"></activity>
+        <activity android:name=".activities.SeriesDetailActivity" />
+        <activity android:name=".activities.ActorDetailActivity"></activity>
     </application>
 
 </manifest>

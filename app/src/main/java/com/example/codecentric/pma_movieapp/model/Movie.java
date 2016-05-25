@@ -7,25 +7,39 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Aleksandar Ratkov on 23.5.16..
  */
-public class Movie implements Parcelable{
+public class Movie extends RealmObject implements Parcelable{
     public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 
     //TODO da li je potreban mozda id zbog kasnijeg rate-inga
 
     private String title;
+
     @SerializedName("poster_path")
     private String poster;
+
     @SerializedName("overview")
     private String description;
+
     @SerializedName("backdrop_path")
     private String backdrop;
+
     @SerializedName("vote_average")
     private double voteAverage;
+
     @SerializedName("release_date")
     private String releaseDate;
+
+    @SerializedName("original_name")
+    private String titleS;
+
+
+    @SerializedName("first_air_date")
+    private String firstAirDate;
 
     public Movie() {
     }
@@ -37,6 +51,8 @@ public class Movie implements Parcelable{
         backdrop = in.readString();
         voteAverage = in.readDouble();
         releaseDate = in.readString();
+        titleS = in.readString();
+        firstAirDate = in.readString();
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -50,6 +66,15 @@ public class Movie implements Parcelable{
             return new Movie[size];
         }
     };
+
+
+    public String getTitleS() {
+        return titleS;
+    }
+
+    public void setTitleS(String titleS) {
+        this.titleS = titleS;
+    }
 
     public String getTitle() {
         return title;
@@ -99,6 +124,14 @@ public class Movie implements Parcelable{
         this.releaseDate = releaseDate;
     }
 
+    public String getFirstAirDate() {
+        return firstAirDate;
+    }
+
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -123,6 +156,8 @@ public class Movie implements Parcelable{
         parcel.writeString(backdrop);
         parcel.writeDouble(voteAverage);
         parcel.writeString(releaseDate);
+        parcel.writeString(titleS);
+        parcel.writeString(firstAirDate);
     }
 
     public static class MovieResult {

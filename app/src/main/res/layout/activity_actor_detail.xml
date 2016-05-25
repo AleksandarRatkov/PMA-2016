@@ -23,7 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary">
             <ImageView
-                android:id="@+id/movie_backdrop"
+                android:id="@+id/actor_profile_path"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/movie_title"
+                android:id="@+id/actor_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -61,7 +61,7 @@
                 />
 
             <TextView
-                android:id="@+id/movie_average"
+                android:id="@+id/actor_popularity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -69,24 +69,40 @@
                 />
 
             <TextView
-                android:id="@+id/movie_release_date"
+                android:id="@+id/known_for"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
                 android:textAppearance="?android:textAppearanceMedium"
+                android:text="@string/known_for"
                 />
 
             <TextView
-                android:id="@+id/movie_description"
-                android:layout_width="match_parent"
-                android:padding="@dimen/activity_vertical_margin"
-                android:layout_height="wrap_content"/>
-            <ImageView
-                android:id="@+id/movie_posters"
+                android:id="@+id/movie1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"/>
+                android:padding="@dimen/activity_vertical_margin"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                />
 
+            <TextView
+                android:id="@+id/movie2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_vertical_margin"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                />
+
+            <TextView
+                android:id="@+id/movie3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_vertical_margin"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimary"
+                />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

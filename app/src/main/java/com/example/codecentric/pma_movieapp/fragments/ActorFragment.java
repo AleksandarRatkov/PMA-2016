@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.codecentric.pma_movieapp.R;
-import com.example.codecentric.pma_movieapp.adapters.SeriesAdapter;
-import com.example.codecentric.pma_movieapp.model.Series;
-import com.example.codecentric.pma_movieapp.service.SeriesService;
+import com.example.codecentric.pma_movieapp.adapters.ActorsAdapter;
+import com.example.codecentric.pma_movieapp.model.Actor;
+import com.example.codecentric.pma_movieapp.service.ActorService;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -21,26 +21,23 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-/**
- * Created by Aleksandar Ratkov on 24.5.16..
- */
-public class SeriesFragment extends Fragment {
+public class ActorFragment extends Fragment {
 
 
-    private RecyclerView sRecyclerView;
-    private SeriesAdapter sAdapter;
+    private RecyclerView aRecyclerView;
+    private ActorsAdapter aAdapter;
 
-    public static SeriesFragment newInstance() {
 
-        SeriesFragment ma = new SeriesFragment();
+    public static ActorFragment newInstance(){
 
-        return ma;
+        ActorFragment af = new ActorFragment();
+        return af;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = inflater.inflate(R.layout.series_fragment,container,false);
+        View view = inflater.inflate(R.layout.actor_fragment,container,false);
 
         return view;
     }
@@ -49,14 +46,14 @@ public class SeriesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        sRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerViewSeries);
-        sRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        sAdapter = new SeriesAdapter(getActivity());
-        sRecyclerView.setAdapter(sAdapter);
-        getPopularSeries();
+        aRecyclerView = (RecyclerView) getView().findViewById(R.id.recyclerViewActor);
+        aRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        aAdapter = new ActorsAdapter(getActivity());
+        aRecyclerView.setAdapter(aAdapter);
+        getPopularActors();
     }
 
-    private void getPopularSeries() {
+    private void getPopularActors() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.themoviedb.org/3")
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -67,11 +64,11 @@ public class SeriesFragment extends Fragment {
                 })
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
-        SeriesService service = restAdapter.create(SeriesService.class);
-        service.getPopularSeries(new Callback<Series.SeriesResult>() {
+        ActorService service = restAdapter.create(ActorService.class);
+        service.getPopularActors(new Callback<Actor.ActorResault>() {
             @Override
-            public void success(Series.SeriesResult seriesResult, Response response) {
-                sAdapter.setSeriesList(seriesResult.getResults());
+            public void success(Actor.ActorResault actorResult, Response response) {
+                aAdapter.setActorList(actorResult.getResults());
             }
 
             @Override
@@ -81,11 +78,11 @@ public class SeriesFragment extends Fragment {
         });
     }
 
-    public static class SeriesViewHolder extends RecyclerView.ViewHolder {
+    public static class ActorViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public SeriesViewHolder(View itemView) {
+        public ActorViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.row_series);
+            imageView = (ImageView) itemView.findViewById(R.id.row_actor);
         }
     }
 }
