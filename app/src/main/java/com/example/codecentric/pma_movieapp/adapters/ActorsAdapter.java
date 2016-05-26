@@ -52,7 +52,9 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorFragment.ActorViewH
         Actor actor = aActorsList.get(position);
         Picasso.with(aContext)
                 .load(actor.getProfilePath())
-                .placeholder(R.color.colorAccent)
+                .placeholder(R.drawable.actors)
+                .noFade()
+                .resize(300,300)
                 .into(holder.imageView);
     }
 

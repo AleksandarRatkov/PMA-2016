@@ -51,7 +51,9 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesFragment.SeriesVie
         Series series = sSeriesList.get(position);
         Picasso.with(sContext)
                 .load(series.getPoster())
-                .placeholder(R.color.colorAccent)
+                .placeholder(R.drawable.series)
+                .noFade()
+                .resize(300,300)
                 .into(holder.imageView);
     }
 

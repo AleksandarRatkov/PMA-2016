@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.codecentric.pma_movieapp.R;
 import com.example.codecentric.pma_movieapp.activities.MovieDetailActivity;
 import com.example.codecentric.pma_movieapp.fragments.MovieFragment;
@@ -51,8 +52,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieFragment.MovieViewHo
         Movie movie = mMovieList.get(position);
         Picasso.with(mContext)
                 .load(movie.getPoster())
-                .placeholder(R.color.colorAccent)
+                .placeholder(R.drawable.movies)
+                .noFade()
+                .resize(300,300)
                 .into(holder.imageView);
+
     }
 
     @Override

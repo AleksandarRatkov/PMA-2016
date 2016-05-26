@@ -54,6 +54,9 @@ public class MovieFragment extends Fragment {
     }
 
     private void getPopularMovies() {
+
+        //Realm realm = Realm.getInstance(new RealmConfiguration.Builder(getContext()).name("MovieRealm.realm").build());
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.themoviedb.org/3")
                 .setRequestInterceptor(new RequestInterceptor() {
