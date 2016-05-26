@@ -2,8 +2,12 @@ package com.example.codecentric.pma_movieapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -58,6 +62,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieFragment.MovieViewHo
                 .into(holder.imageView);
 
     }
+
 
     @Override
     public int getItemCount() {

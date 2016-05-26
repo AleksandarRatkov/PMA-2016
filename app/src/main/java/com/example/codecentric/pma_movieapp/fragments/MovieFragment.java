@@ -3,9 +3,14 @@ package com.example.codecentric.pma_movieapp.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +26,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
-public class MovieFragment extends Fragment {
+public class MovieFragment extends Fragment implements SearchView.OnQueryTextListener {
 
 
     private RecyclerView mRecyclerView;
@@ -40,6 +45,23 @@ public class MovieFragment extends Fragment {
         View view = inflater.inflate(R.layout.movie_fragment,container,false);
 
         return view;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.search).setVisible(true);
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_search,menu);
+        //TODO dodati listener
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
+
     }
 
     @Override
@@ -79,6 +101,17 @@ public class MovieFragment extends Fragment {
                 error.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+        //TODO do the search and show movies that are found
     }
 
     public static class MovieViewHolder extends RecyclerView.ViewHolder {

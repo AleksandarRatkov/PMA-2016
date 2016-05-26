@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     private void prepareMenu(ArrayList<MenuItem> mNavItems ){
         mNavItems.add(new MenuItem(getString(R.string.movies), getString(R.string.movies_long), R.drawable.ic_theater));
         mNavItems.add(new MenuItem(getString(R.string.series), getString(R.string.series_long), R.drawable.ic_sofa));
