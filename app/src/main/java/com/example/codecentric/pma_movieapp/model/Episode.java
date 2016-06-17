@@ -8,11 +8,14 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by codecentric on 14.6.16..
+ * Created by Aleksandar Ratkov on 14.6.16..
  */
 public class Episode implements Parcelable {
 
     public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
+
+    @SerializedName("id")
+    private Long id;
 
     @SerializedName("name")
     private String name;
@@ -23,30 +26,35 @@ public class Episode implements Parcelable {
     @SerializedName("still_path")
     private String poster;
 
-    @SerializedName("vote_average")
-    private double voteAverage;
+    @SerializedName("episode_number")
+    private int episodeNumber;
 
     @SerializedName("air_date")
     private String airDate;
 
+    private String seasonPoster;
+
     public Episode() {
     }
 
-    public Episode(String poster, String name, String description, double voteAverage, String airDate) {
+    public Episode(Long id,String poster, String name, String description, int episodeNumber, String airDate) {
+        this.id = id;
         this.poster = poster;
         this.name = name;
         this.description = description;
-        this.voteAverage = voteAverage;
+        this.episodeNumber = episodeNumber;
         this.airDate = airDate;
 
     }
 
     public Episode(Parcel p) {
+        id = p.readLong();
         name = p.readString();
         description = p.readString();
         poster = p.readString();
-        voteAverage = p.readDouble();
+        episodeNumber = p.readInt();
         airDate = p.readString();
+        seasonPoster = p.readString();
     }
 
     public static final Creator<Episode> CREATOR = new Creator<Episode>() {
@@ -60,6 +68,14 @@ public class Episode implements Parcelable {
             return new Episode[size];
         }
     };
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -85,12 +101,12 @@ public class Episode implements Parcelable {
         this.poster = poster;
     }
 
-    public double getVoteAverage() {
-        return voteAverage;
+    public int getVoteAverage() {
+        return episodeNumber;
     }
 
-    public void setVoteAverage(double voteAverage) {
-        this.voteAverage = voteAverage;
+    public void setVoteAverage(int episodeNumber) {
+        this.episodeNumber = episodeNumber;
     }
 
     public String getAirDate() {
@@ -101,13 +117,21 @@ public class Episode implements Parcelable {
         this.airDate = airDate;
     }
 
+    public String getSeasonPoster() {
+        return IMAGE_PATH + seasonPoster;
+    }
+
+    public void setSeasonPoster(String seasonPoster) {
+        this.seasonPoster = seasonPoster;
+    }
+
     @Override
     public String toString() {
         return "Episode{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", poster='" + poster + '\'' +
-                ", voteAverage=" + voteAverage +
+                ", episodeNumber=" + episodeNumber +
                 '}';
     }
 
@@ -119,19 +143,13 @@ public class Episode implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int flags){
+        parcel.writeLong(id);
         parcel.writeString(name);
         parcel.writeString(description);
         parcel.writeString(poster);
-        parcel.writeDouble(voteAverage);
+        parcel.writeInt(episodeNumber);
         parcel.writeString(airDate);
+        parcel.writeString(seasonPoster);
 
-    }
-
-    public static class EpisodeResult {
-        private List<Episode> results;
-
-        public List<Episode> getResults() {
-            return results;
-        }
     }
 }

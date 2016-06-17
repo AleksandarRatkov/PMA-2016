@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by codecentric on 14.6.16..
+ * Created by Aleksandar Ratkov on 14.6.16..
  */
 public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeFragment.EpisodeViewHolder>{
 

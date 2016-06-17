@@ -23,7 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary">
             <ImageView
-                android:id="@+id/episode_poster"
+                android:id="@+id/season_of_episode_poster"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 />
 
             <TextView
-                android:id="@+id/episode_average"
+                android:id="@+id/episode_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -81,6 +81,12 @@
                 android:layout_width="match_parent"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/episode_poster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

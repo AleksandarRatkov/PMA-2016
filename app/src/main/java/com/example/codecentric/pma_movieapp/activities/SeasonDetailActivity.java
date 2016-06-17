@@ -59,15 +59,16 @@ public class SeasonDetailActivity extends AppCompatActivity {
         seasonDescription.setText(sSeason.getDescription());
         seasonEpisodes.setText("Number of episodes: " + sSeason.getEpisodeCount());
         seasonNumber.setText("Season number: " + sSeason.getSeasonNumber());
-        episodes.setText("See series seasons");
+        episodes.setText("See episodes of season");
 
         episodes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(SeasonDetailActivity.this,MainActivity.class);
-                intent.putExtra("fragmentNumber",2);
-                intent.putExtra("seasonId",sSeason.getId());
+                intent.putExtra(MainActivity.FRAGMENT_NUMBER,2);
+                intent.putExtra(MainActivity.SERIES_ID,sSeason.getSeriesId());
+                intent.putExtra(MainActivity.SEASON_NUMBER,sSeason.getSeasonNumber());
                 startActivity(intent);
 
             }

@@ -16,10 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.codecentric.pma_movieapp.MainActivity;
 import com.example.codecentric.pma_movieapp.R;
 import com.example.codecentric.pma_movieapp.adapters.EpisodeAdapter;
 import com.example.codecentric.pma_movieapp.model.Episode;
+import com.example.codecentric.pma_movieapp.model.EpisodeData;
+import com.example.codecentric.pma_movieapp.model.Season;
 import com.example.codecentric.pma_movieapp.service.SeriesService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -28,13 +34,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by codecentric on 14.6.16..
+ * Created by Aleksandar Ratkov on 14.6.16..
  */
 public class EpisodeFragment extends Fragment{
 
 
     private RecyclerView eRecyclerView;
     private EpisodeAdapter eAdapter;
+    private Long seriesId;
+    private int seasonNumber;
 
     public static EpisodeFragment newInstance() {
 
@@ -45,7 +53,11 @@ public class EpisodeFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+
+        Bundle bundle = getActivity().getIntent().getExtras();
+        seriesId = bundle.getLong(MainActivity.SERIES_ID);
+        seasonNumber = bundle.getInt(MainActivity.SEASON_NUMBER);
+
         View view = inflater.inflate(R.layout.episodes_fragment,container,false);
 
         return view;
@@ -75,10 +87,18 @@ public class EpisodeFragment extends Fragment{
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         SeriesService service = restAdapter.create(SeriesService.class);
-        service.getSeriesEpisodes(new Callback<Episode.EpisodeResult>() {
+        service.getSeasonsEpisodes(seriesId,seasonNumber,new Callback<EpisodeData>() {
             @Override
-            public void success(Episode.EpisodeResult episodeResult, Response response) {
-                eAdapter.setEpisodesList(episodeResult.getResults());
+            public void success(EpisodeData episodeResult, Response response) {
+                List<Episode> episodes = new ArrayList<>();
+
+                for (Episode e: episodeResult.getEpisodes()) {
+
+                    e.setSeasonPoster(episodeResult.getPoster());
+                    episodes.add(e);
+                }
+
+                eAdapter.setEpisodesList(episodes);
             }
 
             @Override

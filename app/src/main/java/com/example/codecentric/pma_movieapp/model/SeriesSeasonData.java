@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by codecentric on 15.6.16..
+ * Created by Aleksandar Ratkov on 15.6.16..
  */
 public class SeriesSeasonData implements Parcelable{
 

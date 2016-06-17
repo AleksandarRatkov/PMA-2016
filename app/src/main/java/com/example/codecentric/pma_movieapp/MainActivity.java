@@ -31,8 +31,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     public static final String SERIES_ID = "id";
-    public static final String SEASON_ID = "seasonId";
     public static final String FRAGMENT_NUMBER = "fragmentNumber";
+    public static final String SEASON_NUMBER = "seasonNumber";
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -111,8 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(getIntent().getIntExtra(FRAGMENT_NUMBER,0) == 2){
             Bundle bundle = new Bundle();
-            Long seasonId = getIntent().getLongExtra(SERIES_ID,0);
-            bundle.putLong(SERIES_ID, seasonId );
+            Long seriesId = getIntent().getLongExtra(SERIES_ID,0);
+            Long seasonNumber = getIntent().getLongExtra(SEASON_NUMBER,0);
+            bundle.putLong(SERIES_ID, seriesId );
+            bundle.putLong(SEASON_NUMBER, seasonNumber );
             EpisodeFragment episodeFragment = new EpisodeFragment();
             episodeFragment.setArguments(bundle);
             FragmentTransition.to(episodeFragment,this, false);

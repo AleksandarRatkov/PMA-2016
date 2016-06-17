@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by codecentric on 16.6.16..
+ * Created by Aleksandar Ratkov on 16.6.16..
  */
 public class Season implements Parcelable{
 
@@ -32,6 +32,8 @@ public class Season implements Parcelable{
     private String title;
 
     private String description;
+
+    private Long seriesId;
 
     public Season(Long id, int seasonNumber, String poster, String airDate, int episodeCount, SeriesSeasonData seriesSeasonData) {
         this.id = id;
@@ -72,6 +74,7 @@ public class Season implements Parcelable{
         backdropPath = in.readString();
         title = in.readString();
         description = in.readString();
+        seriesId = in.readLong();
     }
 
     public static final Creator<Season> CREATOR = new Creator<Season>() {
@@ -85,6 +88,15 @@ public class Season implements Parcelable{
             return new Season[size];
         }
     };
+
+
+    public Long getSeriesId() {
+        return seriesId;
+    }
+
+    public void setSeriesId(Long seriesId) {
+        this.seriesId = seriesId;
+    }
 
     public Long getId() {
         return id;
@@ -165,6 +177,7 @@ public class Season implements Parcelable{
         dest.writeString(backdropPath);
         dest.writeString(title);
         dest.writeString(description);
+        dest.writeLong(seriesId);
     }
 
     @Override

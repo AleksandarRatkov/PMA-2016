@@ -85,13 +85,14 @@ public class SeasonFragment extends Fragment {
             @Override
             public void success(SeriesSeasonData seasonResult, Response response) {
 
-                List<Season> seasons = new ArrayList<Season>();
+                List<Season> seasons = new ArrayList<>();
 
                 for (Season s: seasonResult.getSeasons()) {
 
                     s.setTitle(seasonResult.getTitle());
                     s.setBackdropPath(seasonResult.getBackdropPath());
                     s.setDescription(seasonResult.getDescription());
+                    s.setSeriesId(seasonResult.getId());
                     seasons.add(s);
                 }
                 sAdapter.setSeasonList(seasons);

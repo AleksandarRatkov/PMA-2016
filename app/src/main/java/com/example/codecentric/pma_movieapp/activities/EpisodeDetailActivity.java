@@ -19,8 +19,9 @@ public class EpisodeDetailActivity extends AppCompatActivity {
 
     private Episode eEpisode;
     ImageView poster;
+    ImageView seasonPoster;
     TextView name;
-    TextView average;
+    TextView episodeNumber;
     TextView description;
     TextView releaseDate;
 
@@ -41,15 +42,20 @@ public class EpisodeDetailActivity extends AppCompatActivity {
 
 
         name = (TextView) findViewById(R.id.episode_name);
-        average = (TextView) findViewById(R.id.episode_average);
+        episodeNumber = (TextView) findViewById(R.id.episode_number);
         description = (TextView) findViewById(R.id.episode_description);
+        seasonPoster = (ImageView) findViewById(R.id.season_of_episode_poster);
         poster = (ImageView) findViewById(R.id.episode_poster);
         releaseDate = (TextView) findViewById(R.id.episode_release_date);
 
         name.setText(eEpisode.getName());
-        average.setText("Vote average: " + eEpisode.getVoteAverage());
+        episodeNumber.setText("Episode : " + eEpisode.getVoteAverage());
         description.setText(eEpisode.getDescription());
         releaseDate.setText("Release date: " + eEpisode.getAirDate());
+        Picasso.with(this)
+                .load(eEpisode.getSeasonPoster())
+                .into(seasonPoster);
+
         Picasso.with(this)
                 .load(eEpisode.getPoster())
                 .into(poster);
