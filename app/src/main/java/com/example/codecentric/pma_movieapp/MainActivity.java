@@ -15,17 +15,24 @@ import android.widget.Toast;
 
 import com.example.codecentric.pma_movieapp.adapters.DrawerListAdapter;
 import com.example.codecentric.pma_movieapp.fragments.ActorFragment;
+import com.example.codecentric.pma_movieapp.fragments.EpisodeFragment;
 import com.example.codecentric.pma_movieapp.fragments.MovieFragment;
+import com.example.codecentric.pma_movieapp.fragments.SeasonFragment;
 import com.example.codecentric.pma_movieapp.fragments.SeriesFragment;
 import com.example.codecentric.pma_movieapp.model.MenuItem;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Aleksandar Ratkov on 23.5.16..
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static final String SERIES_ID = "id";
+    public static final String SEASON_ID = "seasonId";
+    public static final String FRAGMENT_NUMBER = "fragmentNumber";
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+    public enum MenuDrawer{MOVIES,SERIES,ACTORS}
+
+
 
 
     @Override
@@ -85,7 +95,29 @@ public class MainActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle("iReviewer");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
+
+
         };
+
+        if(getIntent().getIntExtra(FRAGMENT_NUMBER,0) == 1){
+            Bundle bundle = new Bundle();
+            Long seriesId = getIntent().getLongExtra(SERIES_ID,0);
+            bundle.putLong(SERIES_ID, seriesId );
+            SeasonFragment seasonFragment = new SeasonFragment();
+            seasonFragment.setArguments(bundle);
+            FragmentTransition.to(seasonFragment,this, false);
+
+        }
+
+        if(getIntent().getIntExtra(FRAGMENT_NUMBER,0) == 2){
+            Bundle bundle = new Bundle();
+            Long seasonId = getIntent().getLongExtra(SERIES_ID,0);
+            bundle.putLong(SERIES_ID, seasonId );
+            EpisodeFragment episodeFragment = new EpisodeFragment();
+            episodeFragment.setArguments(bundle);
+            FragmentTransition.to(episodeFragment,this, false);
+
+        }
     }
 
 
@@ -118,7 +150,6 @@ public class MainActivity extends AppCompatActivity {
 
         }else if(position == 3){
             Toast.makeText(getApplicationContext(),"3 toast",Toast.LENGTH_LONG).show();
-            //..
         }else{
             Log.e("DRAWER", "Nesto van opsega!");
         }

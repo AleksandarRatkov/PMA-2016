@@ -1,14 +1,19 @@
 package com.example.codecentric.pma_movieapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.codecentric.pma_movieapp.FragmentTransition;
+import com.example.codecentric.pma_movieapp.MainActivity;
 import com.example.codecentric.pma_movieapp.R;
+import com.example.codecentric.pma_movieapp.fragments.SeasonFragment;
 import com.example.codecentric.pma_movieapp.model.Series;
 import com.squareup.picasso.Picasso;
 
@@ -22,6 +27,7 @@ public class SeriesDetailActivity extends AppCompatActivity {
     TextView average;
     TextView description;
     TextView firstAirDate;
+    TextView seasons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +50,26 @@ public class SeriesDetailActivity extends AppCompatActivity {
         description = (TextView) findViewById(R.id.series_description);
         poster = (ImageView) findViewById(R.id.series_poster);
         firstAirDate = (TextView) findViewById(R.id.series_firstairdate);
+        seasons = (TextView) findViewById(R.id.series_seasons);
 
         title.setText(sSeries.getTitle());
         average.setText("Vote average: " + sSeries.getVoteAverage());
         description.setText(sSeries.getDescription());
         firstAirDate.setText("First Air Date: " + sSeries.getFirstAirDate());
+        seasons.setText("See series seasons");
+
+        seasons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(SeriesDetailActivity.this,MainActivity.class);
+                intent.putExtra("fragmentNumber",1);
+                intent.putExtra("id",sSeries.getId());
+                startActivity(intent);
+
+            }
+        });
+
         Picasso.with(this)
                 .load(sSeries.getPoster())
                 .into(poster);
@@ -57,6 +78,8 @@ public class SeriesDetailActivity extends AppCompatActivity {
                 .into(backdrop);
 
         Log.e("Series objekat: ", sSeries.toString());
+
+
 
     }
 }

@@ -1,10 +1,13 @@
 package com.example.codecentric.pma_movieapp.service;
 
+import com.example.codecentric.pma_movieapp.model.Episode;
 import com.example.codecentric.pma_movieapp.model.Genre;
+import com.example.codecentric.pma_movieapp.model.SeriesSeasonData;
 import com.example.codecentric.pma_movieapp.model.Series;
 
 import retrofit.Callback;
 import retrofit.http.GET;
+import retrofit.http.Path;
 
 /**
  * Created by Aleksandar Ratkov on 23.5.16..
@@ -18,6 +21,12 @@ public interface SeriesService {
     @GET("/search/tv")
     void getSearchedSeries(Callback<Series.SeriesResult> cb);
 
+    @GET("/tv/{id}")
+    void getSeriesSeasons(@Path("id") Long seriesId, Callback<SeriesSeasonData> cb);
+
     @GET("/genre/tv/list")
     void getSeriesGenres(Callback<Genre.GenreResult> cb);
+
+    @GET("/genre/tv/list")
+    void getSeriesEpisodes(Callback<Episode.EpisodeResult> cb);
 }

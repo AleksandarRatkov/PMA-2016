@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.ActorDetailActivity">
+    tools:context=".activities.SeasonDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -23,7 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary">
             <ImageView
-                android:id="@+id/actor_profile_path"
+                android:id="@+id/season_backdrop"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
@@ -53,7 +53,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/actor_name"
+                android:id="@+id/season_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -61,7 +61,7 @@
                 />
 
             <TextView
-                android:id="@+id/actor_popularity"
+                android:id="@+id/season_air_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
@@ -69,40 +69,41 @@
                 />
 
             <TextView
-                android:id="@+id/known_for"
+                android:id="@+id/season_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:text="@string/known_for"
                 />
 
             <TextView
-                android:id="@+id/movie1"
+                android:id="@+id/season_episodes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"
+                android:textAppearance="?android:textAppearanceMedium"
+                />
+
+            <TextView
+                android:id="@+id/season_description"
+                android:layout_width="match_parent"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/see_seasons_episodes"
+                android:layout_width="match_parent"
+                android:padding="@dimen/activity_vertical_margin"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorPrimary"
                 />
 
-            <TextView
-                android:id="@+id/movie2"
+            <ImageView
+                android:id="@+id/season_poster"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="@dimen/activity_vertical_margin"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorPrimary"
-                />
+                android:adjustViewBounds="true"/>
 
-            <TextView
-                android:id="@+id/movie3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/activity_vertical_margin"
-                android:textAppearance="?android:textAppearanceMedium"
-                android:textColor="@color/colorPrimary"
-                />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -48,7 +48,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.movie_fragment,container,false);
-
         return view;
     }
 

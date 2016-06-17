@@ -14,6 +14,9 @@ public class Series implements Parcelable {
 
     public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 
+    @SerializedName("id")
+    private Long id;
+
     @SerializedName("original_name")
     private String title;
 
@@ -33,10 +36,12 @@ public class Series implements Parcelable {
     private String firstAirDate;
 
 
-    public Series() {
+
+    public Series(String titleS, String description, String poster, String backdrop, double voteAverage, String firstAirDate) {
     }
 
-    public Series(String title, String description, String poster, String backdrop, double voteAverage, String firstAirDate) {
+    public Series(Long id, String title, String description, String poster, String backdrop, double voteAverage, String firstAirDate, int numberOfSeasons) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.poster = poster;
@@ -45,13 +50,33 @@ public class Series implements Parcelable {
         this.firstAirDate = firstAirDate;
     }
 
+    public Series(String title, String description, String poster, String backdrop, double voteAverage, String firstAirDate, int numberOfSeasons) {
+        this.title = title;
+        this.description = description;
+        this.poster = poster;
+        this.backdrop = backdrop;
+        this.voteAverage = voteAverage;
+        this.firstAirDate = firstAirDate;
+
+    }
+
     public Series(Parcel p) {
+        id = p.readLong();
         title = p.readString();
         poster = p.readString();
         description = p.readString();
         backdrop = p.readString();
         voteAverage = p.readDouble();
         firstAirDate = p.readString();
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public static final Creator<Series> CREATOR = new Creator<Series>() {
@@ -133,12 +158,14 @@ public class Series implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeLong(id);
         parcel.writeString(title);
         parcel.writeString(poster);
         parcel.writeString(description);
         parcel.writeString(backdrop);
         parcel.writeDouble(voteAverage);
         parcel.writeString(firstAirDate);
+
     }
 
     public static class SeriesResult {
