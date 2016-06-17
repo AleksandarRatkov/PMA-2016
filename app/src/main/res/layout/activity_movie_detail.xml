@@ -81,11 +81,38 @@
                 android:layout_width="match_parent"
                 android:padding="@dimen/activity_vertical_margin"
                 android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/movie_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:text="@string/rate"
+                    />
+
+                <RatingBar
+                    android:layout_width="253dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/movieRatingBar"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"
+                    android:max="5"
+                    android:stepSize="1"/>
+            </LinearLayout>
+
             <ImageView
                 android:id="@+id/movie_posters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"/>
+
+
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

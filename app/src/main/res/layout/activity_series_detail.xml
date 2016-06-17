@@ -90,6 +90,32 @@
                 android:textAppearance="?android:textAppearanceMedium"
                 android:textColor="@color/colorPrimary"
                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/series_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/activity_vertical_margin"
+                    android:textAppearance="?android:textAppearanceMedium"
+                    android:text="@string/rate"
+                    />
+
+                <RatingBar
+                    android:layout_width="253dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/series_ratingBar"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"
+                    android:max="5"
+                    android:stepSize="1"
+                    />
+            </LinearLayout>
+
             <ImageView
                 android:id="@+id/series_poster"
                 android:layout_width="match_parent"

@@ -17,6 +17,9 @@ public class Movie extends RealmObject implements Parcelable{
 
     //TODO da li je potreban mozda id zbog kasnijeg rate-inga
 
+    @SerializedName("id")
+    private Long id;
+
     private String title;
 
     @SerializedName("poster_path")
@@ -45,6 +48,7 @@ public class Movie extends RealmObject implements Parcelable{
     }
 
     public Movie(Parcel in) {
+        id = in.readLong();
         title = in.readString();
         poster = in.readString();
         description = in.readString();
@@ -132,6 +136,14 @@ public class Movie extends RealmObject implements Parcelable{
         this.firstAirDate = firstAirDate;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "Movie{" +
@@ -150,6 +162,7 @@ public class Movie extends RealmObject implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeLong(id);
         parcel.writeString(title);
         parcel.writeString(poster);
         parcel.writeString(description);

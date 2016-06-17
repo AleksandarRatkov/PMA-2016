@@ -7,7 +7,9 @@ import com.example.codecentric.pma_movieapp.model.SeriesSeasonData;
 import com.example.codecentric.pma_movieapp.model.Series;
 
 import retrofit.Callback;
+import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Path;
 
 /**
@@ -30,4 +32,7 @@ public interface SeriesService {
 
     @GET("/genre/tv/list")
     void getSeriesGenres(Callback<Genre.GenreResult> cb);
+
+    @POST("/tv/{tvId}/rating")
+    void rateSerie(@Path("tvId") Long tvId,@Body float value,Callback<String> cb);
 }
