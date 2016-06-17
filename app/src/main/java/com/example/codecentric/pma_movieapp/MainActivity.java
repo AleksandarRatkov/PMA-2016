@@ -1,5 +1,6 @@
 package com.example.codecentric.pma_movieapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,8 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
+import com.example.codecentric.pma_movieapp.activities.MovieAppPreferenceActivity;
 import com.example.codecentric.pma_movieapp.adapters.DrawerListAdapter;
 import com.example.codecentric.pma_movieapp.fragments.ActorFragment;
 import com.example.codecentric.pma_movieapp.fragments.EpisodeFragment;
@@ -22,8 +22,6 @@ import com.example.codecentric.pma_movieapp.fragments.SeriesFragment;
 import com.example.codecentric.pma_movieapp.model.MenuItem;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Aleksandar Ratkov on 23.5.16..
@@ -76,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
             actionBar.setHomeButtonEnabled(true);
         }
+
 
         mDrawerToggle = new ActionBarDrawerToggle(
                 this,                  /* host Activity */
@@ -151,7 +150,8 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransition.to(ActorFragment.newInstance(), this, false);
 
         }else if(position == 3){
-            Toast.makeText(getApplicationContext(),"3 toast",Toast.LENGTH_LONG).show();
+            Intent preference = new Intent(MainActivity.this,MovieAppPreferenceActivity.class);
+            startActivity(preference);
         }else{
             Log.e("DRAWER", "Nesto van opsega!");
         }
