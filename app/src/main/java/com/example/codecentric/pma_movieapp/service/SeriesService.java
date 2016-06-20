@@ -1,14 +1,15 @@
 package com.example.codecentric.pma_movieapp.service;
 
-import com.example.codecentric.pma_movieapp.model.Episode;
 import com.example.codecentric.pma_movieapp.model.EpisodeData;
 import com.example.codecentric.pma_movieapp.model.Genre;
 import com.example.codecentric.pma_movieapp.model.SeriesSeasonData;
 import com.example.codecentric.pma_movieapp.model.Series;
+import com.google.gson.JsonObject;
 
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
 
@@ -33,6 +34,10 @@ public interface SeriesService {
     @GET("/genre/tv/list")
     void getSeriesGenres(Callback<Genre.GenreResult> cb);
 
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
     @POST("/tv/{tvId}/rating")
-    void rateSerie(@Path("tvId") Long tvId,@Body float value,Callback<String> cb);
+    void rateSerie(@Path("tvId") Long tvId, @Body JsonObject rating, Callback<JsonObject> cb);
 }

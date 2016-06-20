@@ -10,14 +10,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.codecentric.pma_movieapp.FragmentTransition;
 import com.example.codecentric.pma_movieapp.MainActivity;
 import com.example.codecentric.pma_movieapp.R;
-import com.example.codecentric.pma_movieapp.fragments.SeasonFragment;
 import com.example.codecentric.pma_movieapp.model.Series;
-import com.example.codecentric.pma_movieapp.service.MovieService;
 import com.example.codecentric.pma_movieapp.service.SeriesService;
+import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
 
 import retrofit.Callback;
@@ -28,6 +27,7 @@ import retrofit.client.Response;
 
 public class SeriesDetailActivity extends AppCompatActivity {
     public static final String EXTRA_SERIES = "series";
+    public static final String SERIE_TOAST = "You rate this serie with: ";
 
     private Series sSeries;
     ImageView backdrop;
@@ -85,30 +85,43 @@ public class SeriesDetailActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
 
+                final double ratingValue = rating*2;
+
                 Log.i("Vrednost ratinga je: ", String.valueOf(rating));
 
-//                RestAdapter restAdapter = new RestAdapter.Builder()
-//                        .setEndpoint("http://api.themoviedb.org/3")
-//                        .setRequestInterceptor(new RequestInterceptor() {
-//                            @Override
-//                            public void intercept(RequestFacade request) {
-//                                request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
-//                            }
-//                        })
-//                        .setLogLevel(RestAdapter.LogLevel.FULL)
-//                        .build();
-//                SeriesService service = restAdapter.create(SeriesService.class);
-//                service.rateSerie(sSeries.getId(), rating * 2, new Callback<String>() {
-//                    @Override
-//                    public void success(String s, Response response) {
-//                        Log.i("Rate", "Uspesno poslat rating");
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        error.printStackTrace();
-//                    }
-//                });
+                RestAdapter restAdapter = new RestAdapter.Builder()
+                        .setEndpoint("http://api.themoviedb.org/3")
+                        .setRequestInterceptor(new RequestInterceptor() {
+                            @Override
+                            public void intercept(RequestFacade request) {
+                                request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
+                                request.addEncodedQueryParam("session_id", "c6cb419443d23a5ca21eb34e6ba6722c2cff4b26");
+                                request.addEncodedQueryParam("guest_session_id", "f9d8b7bab9e8281400ab8e869bb648b7");
+                                request.addHeader("Content-Type","application/json");
+                                request.addHeader("Accept","application/json");
+
+                            }
+                        })
+                        .setLogLevel(RestAdapter.LogLevel.FULL)
+                        .build();
+
+                JsonObject serieRating = new JsonObject();
+                serieRating.addProperty("value",ratingValue);
+
+
+                SeriesService service = restAdapter.create(SeriesService.class);
+                service.rateSerie(sSeries.getId(), serieRating, new Callback<JsonObject>() {
+                    @Override
+                    public void success(JsonObject s, Response response) {
+                        Toast.makeText(getApplicationContext(), SERIE_TOAST + ratingValue ,Toast.LENGTH_LONG).show();
+                        Log.d("Uspesno", s.toString());
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        error.printStackTrace();
+                    }
+                });
 
             }
         });
