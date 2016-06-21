@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.example.codecentric.pma_movieapp.R;
 
 /**
- * Created by codecentric on 17.6.16..
+ * Created by Aleksandar Ratkov on 17.6.16..
  */
 public class MovieAppPreferenceActivity extends PreferenceActivity{
 

@@ -20,9 +20,4 @@ public class FragmentTransition
 		if(addToBackstack) transaction.addToBackStack(null);
 		transaction.commit();
 	}
-	
-	public static void remove(Fragment fragment, FragmentActivity activity) // TODO izbaciti fragment parametar
-	{
-		activity.getSupportFragmentManager().popBackStack();
-	}
 }

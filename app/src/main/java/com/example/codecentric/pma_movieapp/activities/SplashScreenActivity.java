@@ -12,7 +12,7 @@ import com.example.codecentric.pma_movieapp.R;
 
 public class SplashScreenActivity extends Activity {
 
-    private static int SPLASH_TIME_OUT = 6000; // splash ce biti vidljiv minimum SPLASH_TIME_OUT milisekundi
+    private static int SPLASH_TIME_OUT = 4000; // splash ce biti vidljiv minimum SPLASH_TIME_OUT milisekundi
     private boolean splashScreenShow;
 
     @Override

@@ -16,7 +16,7 @@
         tools:context=".MainActivity">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewMovie"
+            android:id="@+id/recyclerViewGenre"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </RelativeLayout>

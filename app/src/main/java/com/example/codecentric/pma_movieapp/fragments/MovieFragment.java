@@ -19,8 +19,11 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import com.example.codecentric.pma_movieapp.MainActivity;
 import com.example.codecentric.pma_movieapp.R;
+import com.example.codecentric.pma_movieapp.adapters.GenreAdapter;
 import com.example.codecentric.pma_movieapp.adapters.MovieAdapter;
+import com.example.codecentric.pma_movieapp.model.Genre;
 import com.example.codecentric.pma_movieapp.model.Movie;
 import com.example.codecentric.pma_movieapp.service.MovieService;
 
@@ -35,6 +38,7 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
 
     private RecyclerView mRecyclerView;
     private MovieAdapter mAdapter;
+    private Long genreId;
 
 
     public static MovieFragment newInstance() {
@@ -47,6 +51,14 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        try {
+            genreId =getArguments().getLong(GenreAdapter.GENRE_ID);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+
+
+
         View view = inflater.inflate(R.layout.movie_fragment,container,false);
         return view;
     }
@@ -60,7 +72,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_search,menu);
-        //TODO dodati listener
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setOnQueryTextListener(this);
@@ -76,7 +87,13 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
         mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         mAdapter = new MovieAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        getPopularMovies();
+
+        if (genreId != null) {
+
+            getMoviesByGenre(genreId);
+        } else {
+            getPopularMovies();
+        }
     }
 
     private void getPopularMovies() {
@@ -125,7 +142,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
-        //TODO do the search and show movies that are found
     }
 
 
@@ -140,7 +156,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
                     public void intercept(RequestFacade request) {
                         request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
                         request.addEncodedQueryParam("query", finalQuery);
-                        //TODO razmisliti da li da stavis da vraca samo 1 stranicu sa rezultatima
                     }
                 })
                 .setLogLevel(RestAdapter.LogLevel.FULL)
@@ -166,5 +181,31 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             imageView = (ImageView) itemView.findViewById(R.id.row_movie);
         }
     }
+
+    private void getMoviesByGenre(Long genreId) {
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://api.themoviedb.org/3")
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
+                    }
+                })
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        MovieService service = restAdapter.create(MovieService.class);
+        service.getMoviesByGenre(genreId, new Callback<Movie.MovieResult>() {
+            @Override
+            public void success(Movie.MovieResult movieResult, Response response) {
+                mAdapter.setMovieList(movieResult.getResults());
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });
+    }
+
 
 }

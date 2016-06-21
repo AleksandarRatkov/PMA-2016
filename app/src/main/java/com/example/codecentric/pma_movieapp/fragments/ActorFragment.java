@@ -58,7 +58,6 @@ public class ActorFragment extends Fragment implements SearchView.OnQueryTextLis
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_search,menu);
-        //TODO dodati listener
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setOnQueryTextListener(this);
@@ -125,7 +124,6 @@ public class ActorFragment extends Fragment implements SearchView.OnQueryTextLis
                     public void intercept(RequestFacade request) {
                         request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
                         request.addEncodedQueryParam("query", finalQuery);
-                        //TODO razmisliti da li da stavis da vraca samo 1 stranicu sa rezultatima
                     }
                 })
                 .setLogLevel(RestAdapter.LogLevel.FULL)

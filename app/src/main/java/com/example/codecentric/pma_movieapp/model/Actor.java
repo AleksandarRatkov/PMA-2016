@@ -17,7 +17,7 @@ public class Actor implements Parcelable{
     @SerializedName("name")
     private String name;
     @SerializedName("known_for")
-    private List<Movie> knownFor; //TODO razmisli da li ces ovako predstavljati filmove ili preko stringa samo nazive
+    private List<Movie> knownFor;
     @SerializedName("popularity")
     private double popularity;
     @SerializedName("profile_path")

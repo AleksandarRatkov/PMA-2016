@@ -62,7 +62,6 @@ public class SeriesFragment extends Fragment implements SearchView.OnQueryTextLi
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_search,menu);
-        //TODO dodati listener
         MenuItem searchItem = menu.findItem(R.id.search);
         SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         mSearchView.setOnQueryTextListener(this);
@@ -114,7 +113,6 @@ public class SeriesFragment extends Fragment implements SearchView.OnQueryTextLi
     @Override
     public boolean onQueryTextChange(String newText) {
         return false;
-        //TODO do the search and show movies that are found
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -138,7 +136,6 @@ public class SeriesFragment extends Fragment implements SearchView.OnQueryTextLi
                     public void intercept(RequestFacade request) {
                         request.addEncodedQueryParam("api_key", "57ee1e7185a2f6b0600fb00374bc0515");
                         request.addEncodedQueryParam("query", finalQuery);
-                        //TODO razmisliti da li da stavis da vraca samo 1 stranicu sa rezultatima
                     }
                 })
                 .setLogLevel(RestAdapter.LogLevel.FULL)

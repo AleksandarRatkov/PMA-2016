@@ -15,8 +15,6 @@ import io.realm.RealmObject;
 public class Movie extends RealmObject implements Parcelable{
     public static final String IMAGE_PATH = "http://image.tmdb.org/t/p/w500";
 
-    //TODO da li je potreban mozda id zbog kasnijeg rate-inga
-
     @SerializedName("id")
     private Long id;
 

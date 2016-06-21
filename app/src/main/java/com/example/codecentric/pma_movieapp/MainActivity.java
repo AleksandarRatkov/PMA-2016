@@ -16,6 +16,7 @@ import com.example.codecentric.pma_movieapp.activities.MovieAppPreferenceActivit
 import com.example.codecentric.pma_movieapp.adapters.DrawerListAdapter;
 import com.example.codecentric.pma_movieapp.fragments.ActorFragment;
 import com.example.codecentric.pma_movieapp.fragments.EpisodeFragment;
+import com.example.codecentric.pma_movieapp.fragments.GenreFragment;
 import com.example.codecentric.pma_movieapp.fragments.MovieFragment;
 import com.example.codecentric.pma_movieapp.fragments.SeasonFragment;
 import com.example.codecentric.pma_movieapp.fragments.SeriesFragment;
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
         mNavItems.add(new MenuItem(getString(R.string.movies), getString(R.string.movies_long), R.drawable.ic_theater));
         mNavItems.add(new MenuItem(getString(R.string.series), getString(R.string.series_long), R.drawable.ic_sofa));
         mNavItems.add(new MenuItem(getString(R.string.actors), getString(R.string.actors_long), R.drawable.ic_action_person));
+        mNavItems.add(new MenuItem(getString(R.string.genre), getString(R.string.movies_genre), R.drawable.ic_theater));
         mNavItems.add(new MenuItem(getString(R.string.settings), getString(R.string.settings_long), R.drawable.ic_action_settings));
     }
 
@@ -149,7 +151,10 @@ public class MainActivity extends AppCompatActivity {
         }else if(position == 2){
             FragmentTransition.to(ActorFragment.newInstance(), this, false);
 
-        }else if(position == 3){
+        }else if(position == 3){//Genres
+            FragmentTransition.to(GenreFragment.newInstance(), this, false);
+
+        }else if(position == 4){
             Intent preference = new Intent(MainActivity.this,MovieAppPreferenceActivity.class);
             startActivity(preference);
         }else{
