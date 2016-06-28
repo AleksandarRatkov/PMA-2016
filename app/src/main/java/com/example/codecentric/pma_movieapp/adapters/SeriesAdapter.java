@@ -53,7 +53,7 @@ public class SeriesAdapter extends RecyclerView.Adapter<SeriesFragment.SeriesVie
                 .load(series.getPoster())
                 .placeholder(R.drawable.series)
                 .noFade()
-                .resize(300,300)
+                .resize(400,400)
                 .into(holder.imageView);
     }
 

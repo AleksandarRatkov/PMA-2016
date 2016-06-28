@@ -54,7 +54,7 @@ public class EpisodeAdapter extends RecyclerView.Adapter<EpisodeFragment.Episode
                 .load(episodes.getPoster())
                 .placeholder(R.drawable.series)
                 .noFade()
-                .resize(300,300)
+                .resize(400,400)
                 .into(holder.imageView);
     }
 

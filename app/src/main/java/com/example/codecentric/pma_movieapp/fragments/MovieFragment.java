@@ -57,8 +57,6 @@ public class MovieFragment extends Fragment implements SearchView.OnQueryTextLis
             ex.printStackTrace();
         }
 
-
-
         View view = inflater.inflate(R.layout.movie_fragment,container,false);
         return view;
     }

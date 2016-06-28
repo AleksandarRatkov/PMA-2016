@@ -54,7 +54,7 @@ public class ActorsAdapter extends RecyclerView.Adapter<ActorFragment.ActorViewH
                 .load(actor.getProfilePath())
                 .placeholder(R.drawable.actors)
                 .noFade()
-                .resize(300,300)
+                .resize(400,400)
                 .into(holder.imageView);
     }
 

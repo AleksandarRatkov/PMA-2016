@@ -58,7 +58,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieFragment.MovieViewHo
                 .load(movie.getPoster())
                 .placeholder(R.drawable.movies)
                 .noFade()
-                .resize(300,300)
+                .resize(400,400)
                 .into(holder.imageView);
 
     }
